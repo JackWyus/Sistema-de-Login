@@ -50,9 +50,42 @@ export const authProvider = ({ children }) => {
             return "Usuário não cadastrado";
         };
     };
+    /*Vamos criar uma função responsável por fazer o cadastro do usuário*/
+    const signUp = (email, password) => {
+        const usersStorage = JSON.parse(localStorage.getItem("users_db"));
+        const hasUser = usersStorage?.filter((user) => user.email === email); // Vamos verificar se existe algum email cadastrao no sistema com esse que a função vai receber como parâmetro
 
-    return <authContext.Provider> { children } </authContext.Provider>;
+        // Se tiver um email já cadastrado, vamos retornar uma mensagem informando ao usuário
+        if(hasUser?.length){
+            return "Usuário já cadastrado com esse e-mail";
+        };
+        //Se não tiver, vamos criar um novo cadastro para ele então.
 
+        let newUser;
+        if(usersStorage){
+            //Se existir usuários já cadastrado no nosso banco, ele só vai concatenar com os já existente representado por ", {email,password}"
+            newUser = [...usersStorage, { email, password }]; 
+        }else{
+            // Caso ainda não existe nenhum cadastro - vamos criar apenas um conjunto de objeto mesmo.
+            newUser = [{email, password}]; 
+        };
+        localStorage.setItem("users_db", JSON.stringify(newUser));
+
+        return;
+    };
+
+
+    const signOut = () => {
+        setUser(null);
+        localStorage.removeItem("user_token");
+    };
+
+    return (
+    <authContext.Provider 
+        value={{ user, signed: !!user, signin, signUp, signOut}} //Vamos retornar nossos valores, para que possamos usar eles em qualquer parte da nossa aplicação - signed: !!user -> vai verificar se existe um usuário 
+    >
+    { children }
+    </authContext.Provider>);
 };
 
 
