@@ -5,7 +5,7 @@ import { createContext, useEffect, useState } from "react";
 export const authContext = createContext({});
 
 // Vamos crair o authProvider que vai receber um children
-export const authProvider = ({ children }) => {
+export const AuthProvider = ({ children }) => {
     const [user, setUser] = useState();
 
     /*Toda vez que o useEffect carregar nossa aplicação, vamos verificar no "localStorage" o "user_tokne" e o "users_db"*/
@@ -85,7 +85,8 @@ export const authProvider = ({ children }) => {
         value={{ user, signed: !!user, signin, signUp, signOut}} //Vamos retornar nossos valores, para que possamos usar eles em qualquer parte da nossa aplicação - signed: !!user -> vai verificar se existe um usuário 
     >
     { children }
-    </authContext.Provider>);
+    </authContext.Provider>
+    );
 };
 
 

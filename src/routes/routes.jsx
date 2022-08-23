@@ -4,9 +4,10 @@ import Home from '../Pages/Home/index';
 import Login from '../Pages/Login/index';
 import Register from '../Pages/Register/index';
 import NotFound from '../Pages/NotFound/index';
+import useAuth from '../hooks/useAuth';
 
 const Private = ({ Item  }) => {
-    const signed = false;
+    const { signed } = useAuth();
 
     return signed > 0 ? <Item /> : <Login />;
 };
