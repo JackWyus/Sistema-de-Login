@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import Input from '../../components/Button/index';
-import Button from '../../components/Button/index';
+import Input from '../../components/Input';
+import Button from '../../components/Button';
 import * as C from './style';
 import { Link, useNavigate } from 'react-router-dom';
 import useAuth from '../../hooks/useAuth';
@@ -45,11 +45,8 @@ const Signin = () => {
           value={senha}
           onChange={(e) => [setSenha(e.target.value), setError("")]}
         />
-
         <C.labelError>{error}</C.labelError>
-        
         <Button Text="Entrar" onClick={handleLogin} />
-
         <C.LabelSignup>
           Não tem uma conta?
           <C.Strong>
