@@ -1,24 +1,24 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import Home from '../Pages/Home/index';
-import Login from '../Pages/Login/index';
-import Register from '../Pages/Register/index';
+import Signin from '../Pages/Signin/index';
+import Signup  from '../Pages/Signup/index';
 import NotFound from '../Pages/NotFound/index';
 import useAuth from '../hooks/useAuth';
 
 const Private = ({ Item  }) => {
     const { signed } = useAuth();
 
-    return signed > 0 ? <Item /> : <Login />;
+    return signed > 0 ? <Item /> : <Signin />;
 };
 
 function routesWeb(){
     return(
         <BrowserRouter>
             <Routes>
-                <Route path="/Home" element={ <Private Item={ Home } />}/>
-                <Route path="/" element={ <Login/> }/>
-                <Route path="/Register" element={ <Register/> }/>
+                <Route path="/home" element={ <Private Item={ Home } />}/>
+                <Route path="/" element={ <Signin/> }/>
+                <Route path="/signup " element={ <Signup /> }/>
 
                 <Route path="*" element={ <NotFound/> }/>
             </Routes>
