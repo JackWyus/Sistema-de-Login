@@ -1,18 +1,21 @@
 import React from 'react'
-import style from '../Home/style.css'
+import { useNavigate } from 'react-router-dom';
+import Button from '../../components/Button';
+import useAuth from '../../hooks/useAuth';
+import * as C from './style';
 
-function index() {
+const Home = () => {
+  const { signout } = useAuth();
+  const navigate = useNavigate();
 
   return (
-    <div>
-        <div>
-            <h1>Home</h1>
-            <h1>Home</h1>
-            <h1>Home</h1>
-
-        </div>
-    </div>
-  )
+    <C.Container>
+      <C.Title>Home</C.Title>
+      <Button Text="Sair" onClick={() => [signout(), navigate("/")]}>
+        Sair
+      </Button>
+    </C.Container>
+  );
 };
 
-export default index;
+export default Home;
